@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="page-title">CyberTech Global | Tienda Oficial de Gadgets & Hardware</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans min-h-screen flex flex-col selection:bg-cyan-500 selection:text-slate-950">
+
+  <!-- Banner Superior -->
+  <div id="top-banner" class="bg-gradient-to-r from-indigo-700 via-purple-700 to-cyan-600 text-white text-xs py-2.5 px-4 text-center font-bold tracking-wider shadow-md">
+    ⚡ ENVÍOS INTERNACIONALES Y GARANTÍA RESPALDADA POR AMAZON GLOBAL
+  </div>
+
+  <!-- Navegación -->
+  <nav class="border-b border-slate-800 bg-slate-900/95 backdrop-blur sticky top-0 z-40 px-6 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
+    <div class="flex items-center justify-between w-full md:w-auto">
+      <a href="#" class="text-2xl font-extrabold text-indigo-500 tracking-wider">
+        CYBER<span class="text-cyan-400">TECH</span>
+      </a>
+      <div class="flex items-center gap-2 md:hidden">
+        <select id="selector-idioma-movil" onchange="cambiarIdioma(this.value)" class="bg-slate-950 border border-slate-700 rounded-lg px-2 py-1 text-xs text-white">
+          <option value="es">🇪🇸 ES</option>
+          <option value="en">🇺🇸 EN</option>
+        </select>
+        <span class="bg-emerald-950 text-emerald-400 text-xs px-2.5 py-1 rounded-full border border-emerald-800 font-mono">🟢 Online</span>
+      </div>
+    </div>
+    
+    <!-- Buscador Inteligente -->
+    <div class="w-full md:w-96">
+      <input type="text" id="buscador" placeholder="🔍 Buscar gadget..." oninput="filtrarYRenderizar()" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-cyan-400 transition shadow-inner">
+    </div>
+
+    <div class="hidden md:flex items-center gap-4">
+      <div class="flex items-center gap-1 bg-slate-950 border border-slate-700 rounded-xl px-3 py-1.5">
+        <span class="text-xs text-slate-400">🌐</span>
+        <select id="selector-idioma" onchange="cambiarIdioma(this.value)" class="bg-transparent text-xs text-white focus:outline-none cursor-pointer">
+          <option value="es" class="bg-slate-900">Español (ES)</option>
+          <option value="en" class="bg-slate-900">English (EN)</option>
+        </select>
+      </div>
+      <span class="bg-emerald-950 text-emerald-400 text-xs px-3 py-1 rounded-full border border-emerald-800 font-mono flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span id="txt-nav-status">Afiliación Activa</span>
+      </span>
+    </div>
+  </nav>
+
+  <!-- Hero Destacado -->
+  <header class="max-w-7xl mx-auto px-4 py-6 w-full">
+    <div class="bg-gradient-to-r from-indigo-950 via-slate-900 to-slate-950 border border-indigo-500/30 rounded-3xl p-6 md:p-10 flex flex-col md:flex-row gap-8 items-center shadow-2xl">
+      <div class="w-full md:w-1/2">
+        <span id="hero-badge" class="bg-cyan-500/20 text-cyan-300 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider border border-cyan-500/30">🏆 TOP VENTAS INTERNACIONAL</span>
+        <h2 id="hero-title" class="text-3xl md:text-4xl font-extrabold mt-3 text-white leading-tight">Gafas Inteligentes Ray-Ban Meta AI</h2>
+        <p id="hero-desc" class="text-slate-300 text-sm mt-3 leading-relaxed">Cámara de 12 MP, audio espacial y asistencia por inteligencia artificial en tiempo real.</p>
+        
+        <div class="flex items-center gap-2 mt-4 text-amber-400">
+          ★★★★★ <span id="hero-reviews" class="text-xs text-slate-300 font-semibold">(3,410 opiniones verificadas)</span>
+        </div>
+
+        <div class="mt-6 flex flex-wrap items-center gap-4">
+          <span class="text-3xl font-black text-cyan-400">$299.00 USD</span>
+          <a href="https://www.amazon.com/s?k=Ray-Ban+Meta+Smart+Glasses&tag=amazon" target="_blank" id="hero-btn" class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold px-6 py-3 rounded-xl transition shadow-lg shadow-indigo-600/40 text-center text-sm flex items-center gap-2">
+            <span>Ver Ficha en Amazon</span>
+            <span>➔</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="w-full md:w-1/2 flex justify-center">
+        <img src="https://images.unsplash.com/photo-1572635196237-14b3f281503f?q=80&w=600&auto=format&fit=crop" alt="Smart Glasses" class="rounded-2xl border border-slate-700 shadow-2xl object-cover h-64 w-full max-w-md">
+      </div>
+    </div>
+  </header>
+
+  <!-- Filtros -->
+  <section class="max-w-7xl mx-auto px-4 py-4 w-full">
+    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex flex-col md:flex-row justify-between items-center gap-4 shadow-lg">
+      <div class="flex flex-wrap gap-2 w-full md:w-auto" id="botones-categorias">
+        <button onclick="filtrarCategoria('todas')" class="btn-cat bg-indigo-600 text-white px-4 py-2 rounded-xl text-xs font-bold transition shadow" data-cat="todas">Todos</button>
+        <button onclick="filtrarCategoria('wearables')" class="btn-cat bg-slate-800 hover:bg-slate-700 text-slate-300 px-4 py-2 rounded-xl text-xs font-bold transition" data-cat="wearables">Wearables</button>
+        <button onclick="filtrarCategoria('smarthome')" class="btn-cat bg-slate-800 hover:bg-slate-700 text-slate-300 px-4 py-2 rounded-xl text-xs font-bold transition" data-cat="smarthome">Smart Home</button>
+        <button onclick="filtrarCategoria('audio')" class="btn-cat bg-slate-800 hover:bg-slate-700 text-slate-300 px-4 py-2 rounded-xl text-xs font-bold transition" data-cat="audio">Audio & VR</button>
+        <button onclick="filtrarCategoria('gadgets')" class="btn-cat bg-slate-800 hover:bg-slate-700 text-slate-300 px-4 py-2 rounded-xl text-xs font-bold transition" data-cat="gadgets">Gadgets</button>
+      </div>
+
+      <div class="flex items-center gap-2 w-full md:w-auto justify-end">
+        <label id="label-ordenar" class="text-xs text-slate-400 font-medium">Ordenar:</label>
+        <select id="ordenar" onchange="filtrarYRenderizar()" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none">
+          <option value="populares" id="opt-pop">Más Populares</option>
+          <option value="menor-precio" id="opt-min">Precio: Menor a Mayor</option>
+          <option value="mayor-precio" id="opt-max">Precio: Mayor a Menor</option>
+        </select>
+      </div>
+    </div>
+  </section>
+
+  <!-- Catálogo -->
+  <main class="max-w-7xl mx-auto px-4 py-6 w-full flex-grow">
+    <div class="flex justify-between items-center mb-6 border-l-4 border-indigo-500 pl-4">
+      <div>
+        <h3 id="catalogo-titulo" class="text-xl font-bold text-slate-200">Catálogo Tecnológico Verificado</h3>
+        <p class="text-xs text-slate-400 mt-0.5" id="contador-resultados">Mostrando productos</p>
+      </div>
+      <span id="info-paginacion" class="text-xs text-indigo-400 font-mono font-bold bg-indigo-950/60 px-3 py-1.5 rounded-lg border border-indigo-900">Página 1</span>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6" id="catalogo-productos"></div>
+
+    <!-- Paginación -->
+    <div class="flex justify-center items-center gap-4 mt-12" id="paginacion-controls">
+      <button onclick="cambiarPagina(-1)" id="btn-prev" class="bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs font-bold px-5 py-2.5 rounded-xl border border-slate-800 disabled:opacity-40 transition">◀ Anterior</button>
+      <span id="numeros-pagina" class="text-xs font-bold text-cyan-400 bg-slate-900 px-4 py-2 rounded-xl border border-slate-800 font-mono"></span>
+      <button onclick="cambiarPagina(1)" id="btn-next" class="bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs font-bold px-5 py-2.5 rounded-xl border border-slate-800 disabled:opacity-40 transition">Siguiente ▶</button>
+    </div>
+  </main>
+
+  <!-- Modal Detalle -->
+  <div id="modal-producto" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-slate-900 border border-slate-700 rounded-3xl max-w-xl w-full p-6 relative shadow-2xl">
+      <button onclick="cerrarModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg font-bold bg-slate-800 w-8 h-8 rounded-full flex items-center justify-center">✕</button>
+      <div id="modal-contenido"></div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="border-t border-slate-800 bg-slate-900 pt-12 pb-8 px-6 text-slate-400 text-xs mt-12 text-center">
+    &copy; 2026 CyberTech Global. Todos los derechos reservados.
+  </footer>
+
+  <!-- Contador Flotante -->
+  <div class="fixed bottom-4 right-4 bg-slate-900/95 border border-indigo-500/40 text-slate-200 text-xs px-4 py-2.5 rounded-2xl shadow-2xl backdrop-blur flex items-center gap-3 z-50">
+    <span class="relative flex h-2.5 w-2.5">
+      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+      <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+    </span>
+    <span>👥 <span id="txt-visitas">Visitas activas</span>: <strong id="contador-visitas" class="text-cyan-400 font-mono">1,895</strong></span>
+  </div>
+
+  <script>
+    const traducciones = {
+      es: {
+        banner: "⚡ ENVÍOS INTERNACIONALES Y GARANTÍA RESPALDADA POR AMAZON GLOBAL",
+        navStatus: "Afiliación Activa",
+        buscadorPlaceholder: "🔍 Buscar gadget...",
+        heroBadge: "🏆 TOP VENTAS INTERNACIONAL",
+        heroTitle: "Gafas Inteligentes Ray-Ban Meta AI",
+        heroDesc: "Cámara de 12 MP, audio espacial y asistencia por inteligencia artificial en tiempo real.",
+        heroReviews: "(3,410 opiniones verificadas)",
+        heroBtn: "Ver Ficha en Amazon",
+        catTodos: "Todos",
+        catWearables: "Wearables",
+        catSmartHome: "Smart Home",
+        catAudio: "Audio & VR",
+        catGadgets: "Gadgets",
+        labelOrdenar: "Ordenar:",
+        optPop: "Más Populares",
+        optMin: "Precio: Menor a Mayor",
+        optMax: "Precio: Mayor a Menor",
+        catTitulo: "Catálogo Tecnológico Verificado",
+        verDetalle: "👁️ Ver",
+        comprarAmazon: "Comprar en Amazon",
+        visitas: "Visitas activas",
+        pag: "Página",
+        anterior: "◀ Anterior",
+        siguiente: "Siguiente ▶",
+        verFichaAmazonModal: "Ver Ofertas Oficiales en Amazon ➔",
+        analisisIA: "🤖 Análisis IA:"
+      },
+      en: {
+        banner: "⚡ INTERNATIONAL SHIPPING & WARRANTY BACKED BY AMAZON GLOBAL",
+        navStatus: "Active Affiliate",
+        buscadorPlaceholder: "🔍 Search gadget...",
+        heroBadge: "🏆 INTERNATIONAL TOP SELLER",
+        heroTitle: "Ray-Ban Meta Smart Glasses AI",
+        heroDesc: "12 MP camera, spatial audio, and real-time artificial intelligence assistance.",
+        heroReviews: "(3,410 verified reviews)",
+        heroBtn: "View on Amazon",
+        catTodos: "All",
+        catWearables: "Wearables",
+        catSmartHome: "Smart Home",
+        catAudio: "Audio & VR",
+        catGadgets: "Gadgets",
+        labelOrdenar: "Sort by:",
+        optPop: "Most Popular",
+        optMin: "Price: Low to High",
+        optMax: "Price: High to Low",
+        catTitulo: "Verified Tech Catalog",
+        verDetalle: "👁️ View",
+        comprarAmazon: "Buy on Amazon",
+        visitas: "Active visitors",
+        pag: "Page",
+        anterior: "◀ Previous",
+        siguiente: "Next ▶",
+        verFichaAmazonModal: "View Official Offers on Amazon ➔",
+        analisisIA: "🤖 AI Analysis:"
+      }
+    };
+
+    let idiomaActual = "es";
+
+    function cambiarIdioma(lang) {
+      idiomaActual = lang;
+      const t = traducciones[lang];
+
+      document.getElementById('top-banner').innerText = t.banner;
+      document.getElementById('txt-nav-status').innerText = t.navStatus;
+      document.getElementById('buscador').placeholder = t.buscadorPlaceholder;
+      document.getElementById('hero-badge').innerText = t.heroBadge;
+      document.getElementById('hero-title').innerText = t.heroTitle;
+      document.getElementById('hero-desc').innerText = t.heroDesc;
+      document.getElementById('hero-reviews').innerText = t.heroReviews;
+      document.getElementById('hero-btn').querySelector('span').innerText = t.heroBtn;
+      document.getElementById('label-ordenar').innerText = t.labelOrdenar;
+      document.getElementById('opt-pop').innerText = t.optPop;
+      document.getElementById('opt-min').innerText = t.optMin;
+      document.getElementById('opt-max').innerText = t.optMax;
+      document.getElementById('catalogo-titulo').innerText = t.catTitulo;
+      document.getElementById('btn-prev').innerText = t.anterior;
+      document.getElementById('btn-next').innerText = t.siguiente;
+      document.getElementById('txt-visitas').innerText = t.visitas;
+
+      const botones = document.querySelectorAll('.btn-cat');
+      botones.forEach(b => {
+        const cat = b.getAttribute('data-cat');
+        if (cat === 'todas') b.innerText = t.catTodos;
+        if (cat === 'wearables') b.innerText = t.catWearables;
+        if (cat === 'smarthome') b.innerText = t.catSmartHome;
+        if (cat === 'audio') b.innerText = t.catAudio;
+        if (cat === 'gadgets') b.innerText = t.catGadgets;
+      });
+
+      renderizarPagina();
+    }
+
+    function normalizarTexto(texto) {
+      return texto ? texto.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "") : "";
+    }
+
+    const inventarioOficial = [
+      { id: 1, nombre: "Ray-Ban Meta Smart Glasses", categoria: "wearables", precioNum: 299, precio: "$299.00 USD", estrellas: "★★★★★ (4.8)", imagen: "https://images.unsplash.com/photo-1572635196237-14b3f281503f?q=80&w=500&auto=format&fit=crop", analisisIA: "Cámara 12MP y audio espacial integrado.", query: "Ray-Ban+Meta+Smart+Glasses" },
+      { id: 2, nombre: "Oura Ring Gen 3 Smart Ring", categoria: "wearables", precioNum: 299, precio: "$299.00 USD", estrellas: "★★★★★ (4.8)", imagen: "https://images.unsplash.com/photo-1605100804763-247f67b3557e?q=80&w=500&auto=format&fit=crop", analisisIA: "Monitoreo biométrico continuo de sueño y salud.", query: "Oura+Ring+Gen+3" },
+      { id: 3, nombre: "Apple Watch Ultra 2 Titanium", categoria: "wearables", precioNum: 799, precio: "$799.00 USD", estrellas: "★★★★★ (4.9)", imagen: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=500&auto=format&fit=crop", analisisIA: "Caja de titanio y GPS de alta precisión.", query: "Apple+Watch+Ultra+2" },
+      { id: 4, nombre: "Sony WH-1000XM5 Headphones", categoria: "audio", precioNum: 398, precio: "$398.00 USD", estrellas: "★★★★★ (4.9)", imagen: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=500&auto=format&fit=crop", analisisIA: "Cancelación de ruido líder en la industria.", query: "Sony+WH-1000XM5+Headphones" },
+      { id: 5, nombre: "Anker MagGo Wireless Charger", categoria: "gadgets", precioNum: 109, precio: "$109.00 USD", estrellas: "★★★★★ (4.7)", imagen: "https://images.unsplash.com/photo-1586816879360-004f5b0c51e3?q=80&w=500&auto=format&fit=crop", analisisIA: "Cargador magnético Qi2 de carga rápida.", query: "Anker+MagGo+Wireless+Charger" },
+      { id: 6, nombre: "Blink Outdoor 4 Smart Camera", categoria: "smarthome", precioNum: 99, precio: "$99.00 USD", estrellas: "★★★★☆ (4.6)", imagen: "https://images.unsplash.com/photo-1558002038-1055907df827?q=80&w=500&auto=format&fit=crop", analisisIA: "Cámara HD para exteriores con larga batería.", query: "Blink+Outdoor+4+Smart+Camera" },
+      { id: 7, nombre: "Nebula Capsule 3 Laser Projector", categoria: "audio", precioNum: 799, precio: "$799.00 USD", estrellas: "★★★★★ (4.8)", imagen: "https://images.unsplash.com/photo-1535016120720-40c646be5580?q=80&w=500&auto=format&fit=crop", analisisIA: "Proyector portátil 1080p con Google TV.", query: "Nebula+Capsule+3+Laser+Projector" },
+      { id: 8, nombre: "Eufy Security Smart Lock C220", categoria: "smarthome", precioNum: 149, precio: "$149.00 USD", estrellas: "★★★★★ (4.8)", imagen: "https://images.unsplash.com/photo-1558002038-1055907df827?q=80&w=500&auto=format&fit=crop", analisisIA: "Cerradura inteligente con huella dactilar.", query: "Eufy+Security+Smart+Lock+C220" },
+      { id: 9, nombre: "DJI Mini 4 Pro Drone 4K", categoria: "gadgets", precioNum: 759, precio: "$759.00 USD", estrellas: "★★★★★ (4.9)", imagen: "https://images.unsplash.com/photo-1527977966376-1c8408f9f108?q=80&w=500&auto=format&fit=crop", analisisIA: "Dron compacto con video 4K y sensores.", query: "DJI+Mini+4+Pro+Drone" },
+      { id: 10, nombre: "Satechi Slim Bluetooth Keyboard", categoria: "gadgets", precioNum: 79, precio: "$79.00 USD", estrellas: "★★★★☆ (4.5)", imagen: "https://images.unsplash.com/photo-1587829741301-dc798b83add3?q=80&w=500&auto=format&fit=crop", analisisIA: "Teclado de aluminio ultradelgado.", query: "Satechi+Slim+Bluetooth+Keyboard" }
+    ];
+
+    const inventarioCompleto = [];
+    for (let i = 1; i <= 100; i++) {
+      const pBase = inventarioOficial[(i - 1) % inventarioOficial.length];
+      const precioVar = pBase.precioNum + ((i * 2) % 15);
+      
+      inventarioCompleto.push({
+        id: i,
+        nombre: `${pBase.nombre} ${i > 10 ? 'Gen-' + Math.floor(i/10) : ''}`,
+        categoria: pBase.categoria,
+        precioNum: precioVar,
+        precio: `$${precioVar}.00 USD`,
+        estrellas: pBase.estrellas,
+        imagen: pBase.imagen,
+        analisisIA: pBase.analisisIA,
+        // Enlace de consulta blindado con parámetro de Amazon
+        enlaceCompra: `https://www.amazon.com/s?k=${pBase.query}&tag=amazon`
+      });
+    }
+
+    let paginaActual = 1;
+    const itemsPorPagina = 12;
+    let categoriaSeleccionada = "todas";
+    let productosFiltradosActuales = [...inventarioCompleto];
+
+    function filtrarCategoria(cat) {
+      categoriaSeleccionada = cat;
+      paginaActual = 1;
+      document.querySelectorAll('.btn-cat').forEach(b => {
+        b.classList.remove('bg-indigo-600', 'text-white', 'shadow');
+        b.classList.add('bg-slate-800', 'text-slate-300');
+      });
+      event.target.classList.remove('bg-slate-800', 'text-slate-300');
+      event.target.classList.add('bg-indigo-600', 'text-white', 'shadow');
+      filtrarYRenderizar();
+    }
+
+    function filtrarYRenderizar() {
+      const busqueda = normalizarTexto(document.getElementById('buscador').value);
+      const orden = document.getElementById('ordenar').value;
+
+      let resultado = inventarioCompleto.filter(p => {
+        const coincideCat = (categoriaSeleccionada === "todas" || p.categoria === categoriaSeleccionada);
+        if (!coincideCat) return false;
+        if (busqueda === "") return true;
+        return normalizarTexto(p.nombre).includes(busqueda) || normalizarTexto(p.analisisIA).includes(busqueda);
+      });
+
+      if (orden === "menor-precio") resultado.sort((a, b) => a.precioNum - b.precioNum);
+      else if (orden === "mayor-precio") resultado.sort((a, b) => b.precioNum - a.precioNum);
+
+      productosFiltradosActuales = resultado;
+      renderizarPagina();
+    }
+
+    function renderizarPagina() {
+      const t = traducciones[idiomaActual];
+      const contenedor = document.getElementById('catalogo-productos');
+      contenedor.innerHTML = "";
+      const inicio = (paginaActual - 1) * itemsPorPagina;
+      const fin = inicio + itemsPorPagina;
+      const productosPagina = productosFiltradosActuales.slice(inicio, fin);
+
+      document.getElementById('contador-resultados').innerText = `${productosFiltradosActuales.length} items`;
+      document.getElementById('info-paginacion').innerText = `${t.pag} ${paginaActual} / ${Math.ceil(productosFiltradosActuales.length / itemsPorPagina) || 1}`;
+      document.getElementById('numeros-pagina').innerText = `${t.pag} ${paginaActual}`;
+
+      if (productosPagina.length === 0) {
+        contenedor.innerHTML = `<div class="col-span-full text-center py-12 text-slate-500">No products found.</div>`;
+        return;
+      }
+
+      productosPagina.forEach(p => {
+        contenedor.innerHTML += `
+          <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden flex flex-col justify-between shadow-xl hover:border-indigo-500/50 transition duration-300 group">
+            <div class="h-48 w-full bg-slate-950 flex items-center justify-center overflow-hidden relative cursor-pointer" onclick="abrirModal(${p.id})">
+              <span class="absolute top-2 left-2 bg-slate-950/80 backdrop-blur text-cyan-400 text-[10px] font-bold px-2 py-0.5 rounded border border-slate-800 uppercase font-mono z-10">${p.categoria}</span>
+              <img src="${p.imagen}" alt="${p.nombre}" loading="lazy" class="h-full w-full object-cover group-hover:scale-105 transition duration-300">
+            </div>
+            <div class="p-5 flex flex-col flex-grow justify-between">
+              <div>
+                <div class="flex justify-between items-start mb-2 gap-2">
+                  <h4 class="text-sm font-bold text-white line-clamp-1 cursor-pointer hover:text-cyan-400 transition" onclick="abrirModal(${p.id})">${p.nombre}</h4>
+                  <span class="text-cyan-400 font-bold text-sm whitespace-nowrap">${p.precio}</span>
+                </div>
+                <p class="text-[11px] text-amber-400 font-semibold mb-2">${p.estrellas}</p>
+                <div class="bg-indigo-950/40 border border-indigo-900/50 p-2.5 rounded-xl mb-4 text-[11px] text-indigo-200 leading-relaxed">${t.analisisIA} ${p.analisisIA}</div>
+              </div>
+              <div class="flex gap-2">
+                <button onclick="abrirModal(${p.id})" class="bg-slate-800 hover:bg-slate-700 text-slate-300 px-3 py-2.5 rounded-xl text-xs font-bold transition">${t.verDetalle}</button>
+                <a href="${p.enlaceCompra}" target="_blank" class="flex-grow text-center bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold py-2.5 rounded-xl transition shadow-md flex items-center justify-center gap-1">
+                  <span>${t.comprarAmazon}</span>
+                  <span>➔</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        `;
+      });
+
+      document.getElementById('btn-prev').disabled = (paginaActual === 1);
+      document.getElementById('btn-next').disabled = (fin >= productosFiltradosActuales.length);
+    }
+
+    function cambiarPagina(delta) {
+      paginaActual += delta;
+      renderizarPagina();
+      window.scrollTo({ top: 350, behavior: 'smooth' });
+    }
+
+    function abrirModal(id) {
+      const t = traducciones[idiomaActual];
+      const p = inventarioCompleto.find(prod => prod.id === id);
+      if (!p) return;
+      document.getElementById('modal-contenido').innerHTML = `
+        <div class="flex flex-col md:flex-row gap-6 items-center">
+          <img src="${p.imagen}" alt="${p.nombre}" class="w-full md:w-1/2 h-52 object-cover rounded-2xl border border-slate-800">
+          <div class="w-full md:w-1/2">
+            <span class="text-cyan-400 text-xs font-bold font-mono uppercase">${p.categoria}</span>
+            <h3 class="text-xl font-extrabold text-white mt-1">${p.nombre}</h3>
+            <p class="text-2xl font-black text-cyan-400 mt-2">${p.precio}</p>
+            <p class="text-xs text-amber-400 font-semibold mt-1">${p.estrellas}</p>
+            <div class="bg-indigo-950/50 border border-indigo-900 p-3 rounded-xl mt-3 text-xs text-indigo-200">
+              <strong>${t.analisisIA}</strong> ${p.analisisIA}
+            </div>
+            <a href="${p.enlaceCompra}" target="_blank" class="block w-full text-center bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3 rounded-xl transition mt-4 text-sm shadow-lg">
+              ${t.verFichaAmazonModal}
+            </a>
+          </div>
+        </div>
+      `;
+      document.getElementById('modal-producto').classList.remove('hidden');
+    }
+
+    function cerrarModal() {
+      document.getElementById('modal-producto').classList.add('hidden');
+    }
+
+    let visitasBase = 1895;
+    setInterval(() => {
+      visitasBase += Math.floor(Math.random() * 2);
+      document.getElementById('contador-visitas').innerText = visitasBase.toLocaleString();
+    }, 4000);
+
+    filtrarYRenderizar();
+  </script>
+</body>
+</html>
