@@ -253,23 +253,22 @@
     ];
 
     const inventarioCompleto = [];
-    for (let i = 1; i <= 100; i++) {
-      const pBase = inventarioOficial[(i - 1) % inventarioOficial.length];
-      const precioVar = pBase.precioNum + ((i * 2) % 15);
-      
-      inventarioCompleto.push({
-        id: i,
-        nombre: `${pBase.nombre} ${i > 10 ? 'Gen-' + Math.floor(i/10) : ''}`,
-        categoria: pBase.categoria,
-        precioNum: precioVar,
-        precio: `$${precioVar}.00 USD`,
-        estrellas: pBase.estrellas,
-        imagen: pBase.imagen,
-        analisisIA: pBase.analisisIA,
-        // Enlace de consulta blindado con parámetro de Amazon
-        enlaceCompra: `https://www.amazon.com/s?k=${pBase.query}&tag=amazon`
-      });
-    }
+for (let i = 1; i <= 100; i++) {
+  const pBase = inventarioOficial[(i - 1) % inventarioOficial.length];
+  const precioVar = pBase.precioNum + ((i * 2) % 15);
+  
+  inventarioCompleto.push({
+    id: i,
+    nombre: `${pBase.nombre} ${i > 10 ? 'Gen-' + Math.floor(i/10) : ''}`,
+    categoria: pBase.categoria,
+    precioNum: precioVar,
+    precio: `$${precioVar}.00 USD`,
+    estrellas: pBase.estrellas,
+    imagen: pBase.imagen,
+    analisisIA: pBase.analisisIA,
+    enlaceCompra: `https://www.amazon.com/s?k=${pBase.query}&tag=cybertech2008-20`
+  });
+}
 
     let paginaActual = 1;
     const itemsPorPagina = 12;
